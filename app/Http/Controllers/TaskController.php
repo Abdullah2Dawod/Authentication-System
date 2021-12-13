@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Illuminate\support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 
 class TaskController extends Controller
@@ -17,8 +18,7 @@ class TaskController extends Controller
 
     public function index()
     {
-        $tasks = DB::table('tasks')->get();
-
+        $tasks = DB::table('tasks')->where('user_id' , Auth::id())->get();
         return view('tasks', compact('tasks'));
     }
 
